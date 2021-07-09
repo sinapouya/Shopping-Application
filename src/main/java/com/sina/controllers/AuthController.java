@@ -3,16 +3,20 @@ package com.sina.controllers;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.sina.entity.Category;
 import com.sina.entity.Role;
 import com.sina.entity.User;
 import com.sina.enums.RoleEnum;
+import com.sina.payload.request.CategoryRequest;
 import com.sina.payload.request.LoginRequest;
 import com.sina.payload.request.SignupRequest;
+import com.sina.payload.response.CategoryResponse;
 import com.sina.payload.response.JwtResponse;
 import com.sina.payload.response.MessageResponse;
 import com.sina.repository.RoleRepository;
@@ -21,16 +25,13 @@ import com.sina.security.jwt.JwtUtils;
 import com.sina.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -89,7 +90,7 @@ public class AuthController {
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+                encoder.encode(signUpRequest.getPassword()),Boolean.TRUE);
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -120,5 +121,20 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 
+    }
+
+    @GetMapping("/block/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> blockUser(@PathVariable Long id){
+        Optional<User> user = userRepository.findById(id);
+        if (!user.isPresent()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: User does n ot exist with this id!"));
+        }
+        User userObj = user.get();
+        userObj.setEnabled(false);
+        User savedUser = userRepository.save(user.get());
+        return ResponseEntity.ok(savedUser);
     }
 }

@@ -33,6 +33,8 @@ public class User {
     @Size(max = 120)
     private String password;
 
+    private Boolean enabled;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(	name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -46,6 +48,13 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String username, String email, String password, Boolean enabled) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.enabled = enabled;
     }
 
     public Long getId() {
