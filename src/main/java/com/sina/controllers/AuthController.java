@@ -137,4 +137,18 @@ public class AuthController {
         User savedUser = userRepository.save(user.get());
         return ResponseEntity.ok(savedUser);
     }
+    @GetMapping("/unblock/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> unblockUser(@PathVariable Long id){
+        Optional<User> user = userRepository.findById(id);
+        if (!user.isPresent()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: User does n ot exist with this id!"));
+        }
+        User userObj = user.get();
+        userObj.setEnabled(true);
+        User savedUser = userRepository.save(user.get());
+        return ResponseEntity.ok(savedUser);
+    }
 }
