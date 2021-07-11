@@ -16,4 +16,6 @@ public class ProductPollResponse {
 
     private String productName;
 
+    private Integer rate;
+
 }

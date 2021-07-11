@@ -19,8 +19,6 @@ public enum ProductRankEnum {
             return UNKNOWN;
         }
         switch (value) {
-
-
             case 1:
                 return ProductRankEnum.oneStar;
             case 2:
@@ -33,7 +31,6 @@ public enum ProductRankEnum {
                 return ProductRankEnum.fiveStar;
             default:
                 return ProductRankEnum.UNKNOWN;
-
         }
     }
     public static ProductRankEnum fromType(String type) {
