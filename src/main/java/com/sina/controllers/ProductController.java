@@ -21,13 +21,13 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/admin/product")
+@RequestMapping("/api")
 @Validated
 public class ProductController {
     @Autowired
     ProductService productService;
 
-    @PostMapping("create")
+    @PostMapping("/admin/product/create")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> insertProduct(@Valid @RequestBody ProductRequest productRequest){
         if (productService.isProductExist(productRequest.getName())) {
@@ -39,7 +39,7 @@ public class ProductController {
         return ResponseEntity.ok(new ProductResponse(product.getName(), product.getPrice()));
     }
     @GetMapping(value = "/search/product")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<List<Product>> findAllBySpecification(@Valid @NotBlank @RequestParam(value = "search") String search) {
         return ResponseEntity.ok(productService.serachProduct(search));
     }
