@@ -31,9 +31,21 @@ public class ProductService {
         Product product = new Product(productRequest.getName(),productRequest.getPrice(),category);
         return productRepository.save(product);
     }
+    public Product editProduct(ProductRequest productRequest){
+        Category category = categoryRepository.findByName(productRequest.getCategoryName());
+        Product product = new Product(productRequest.getName(),productRequest.getPrice(),category);
+        return productRepository.save(product);
+    }
+    public void deleteProduct(String productName){
+        Product product = productRepository.findByName(productName);
+        productRepository.delete(product);
+    }
 
     public Boolean isProductExist(String name){
         return productRepository.existsByName(name);
+    }
+    public Boolean isProductExist(Long id){
+        return productRepository.existsById(id);
     }
 
     public List<Product> serachProduct(String searchCriteria){

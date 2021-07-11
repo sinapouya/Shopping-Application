@@ -9,11 +9,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 @Data
 public class ProductRequest {
+    Long productId;
+
     @NotEmpty
     @Size(max = 20)
     private String name;
 
-    @NotNull
     private Double price;
 
     @NotEmpty
