@@ -27,6 +27,8 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    CategoryService categoryService;
     @PostMapping("/admin/product/create")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> insertProduct(@Valid @RequestBody ProductRequest productRequest){
@@ -34,6 +36,11 @@ public class ProductController {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: product name is already taken!"));
+        }
+        if (!categoryService.isCategoryExist(productRequest.getCategoryName())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: category name is not exist!"));
         }
         Product product = productService.createProduct(productRequest);
         return ResponseEntity.ok(new ProductResponse(product.getName(), product.getPrice()));

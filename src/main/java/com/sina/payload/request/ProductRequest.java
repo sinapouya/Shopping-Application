@@ -16,4 +16,7 @@ public class ProductRequest {
     @NotNull
     private Double price;
 
+    @NotEmpty
+    @Size(max = 20)
+    private String categoryName;
 }
