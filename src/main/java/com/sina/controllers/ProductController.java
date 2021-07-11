@@ -2,13 +2,18 @@ package com.sina.controllers;
 
 import com.sina.entity.Category;
 import com.sina.entity.Product;
+import com.sina.entity.ProductPoll;
 import com.sina.payload.request.CategoryRequest;
+import com.sina.payload.request.ProductPollRequest;
 import com.sina.payload.request.ProductRequest;
 import com.sina.payload.response.CategoryResponse;
 import com.sina.payload.response.MessageResponse;
+import com.sina.payload.response.ProductPollResponse;
 import com.sina.payload.response.ProductResponse;
 import com.sina.service.CategoryService;
+import com.sina.service.ProductPollService;
 import com.sina.service.ProductService;
+import com.sina.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,7 +33,14 @@ public class ProductController {
     ProductService productService;
 
     @Autowired
+    ProductPollService productPollService;
+
+    @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    UserService userService;
+
     @PostMapping("/admin/product/create")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> insertProduct(@Valid @RequestBody ProductRequest productRequest){
@@ -49,5 +61,21 @@ public class ProductController {
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<List<Product>> findAllBySpecification(@Valid @NotBlank @RequestParam(value = "search") String search) {
         return ResponseEntity.ok(productService.serachProduct(search));
+    }
+    @PostMapping("/productpoll/create")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<?> insertProductPoll(@Valid @RequestBody ProductPollRequest productPollRequest){
+        if (!productService.isProductExist(productPollRequest.getProductName())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: product name is not exist!"));
+        }
+        if (!userService.isUserExist(productPollRequest.getUserName())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: user name is not exist!"));
+        }
+        ProductPoll productPoll = productPollService.createProductPoll(productPollRequest);
+        return ResponseEntity.ok(new ProductPollResponse(productPoll.getComment(),productPoll.getUser().getUsername(), productPoll.getProduct().getName()));
     }
 }
