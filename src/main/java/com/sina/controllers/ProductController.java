@@ -57,6 +57,33 @@ public class ProductController {
         Product product = productService.createProduct(productRequest);
         return ResponseEntity.ok(new ProductResponse(product.getName(), product.getPrice(),product.getCategory().getName()));
     }
+    @PostMapping("/admin/product/edit")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> editProduct(@Valid @RequestBody ProductRequest productRequest){
+        if (!productService.isProductExist(productRequest.getProductId())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: product does not exist!"));
+        }
+        if (!categoryService.isCategoryExist(productRequest.getCategoryName())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: category name is not exist!"));
+        }
+        Product product = productService.editProduct(productRequest);
+        return ResponseEntity.ok(new ProductResponse(product.getName(), product.getPrice(),product.getCategory().getName()));
+    }
+    @PostMapping("/admin/product/delete")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> deleteProduct(@Valid @RequestBody String name){
+        if (!productService.isProductExist(name)) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: product does not exist!"));
+        }
+        productService.deleteProduct(name);
+        return ResponseEntity.ok("product deleted");
+    }
     @GetMapping(value = "/search/product")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<List<Product>> findAllBySpecification(@Valid @NotBlank @RequestParam(value = "search") String search) {
