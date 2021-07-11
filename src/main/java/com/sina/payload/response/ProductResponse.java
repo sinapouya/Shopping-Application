@@ -11,4 +11,5 @@ import javax.validation.constraints.Size;
 public class ProductResponse {
     private String name;
     private Double price;
+    private String categoryName;
 }

@@ -43,7 +43,7 @@ public class ProductController {
                     .body(new MessageResponse("Error: category name is not exist!"));
         }
         Product product = productService.createProduct(productRequest);
-        return ResponseEntity.ok(new ProductResponse(product.getName(), product.getPrice()));
+        return ResponseEntity.ok(new ProductResponse(product.getName(), product.getPrice(),product.getCategory().getName()));
     }
     @GetMapping(value = "/search/product")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
