@@ -8,8 +8,12 @@ import javax.validation.constraints.Size;
 
 @Data
 @AllArgsConstructor
-public class ProductResponse {
-    private String name;
-    private Double price;
-    private String categoryName;
+public class ProductPollResponse {
+
+    private String comment;
+
+    private String userName;
+
+    private String productName;
+
 }

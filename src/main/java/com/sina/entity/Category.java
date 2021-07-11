@@ -1,19 +1,21 @@
 package com.sina.entity;
 
 import com.sina.enums.RoleEnum;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "category")
 @Data
 @NoArgsConstructor
-public class Category{
+@ToString
+@EqualsAndHashCode
+public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

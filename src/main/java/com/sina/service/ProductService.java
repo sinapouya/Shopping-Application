@@ -5,6 +5,7 @@ import com.sina.entity.Category;
 import com.sina.entity.Product;
 import com.sina.payload.request.CategoryRequest;
 import com.sina.payload.request.ProductRequest;
+import com.sina.repository.CategoryRepository;
 import com.sina.repository.ProductRepository;
 import com.sina.repository.ProductSpecificationsBuilder;
 import com.sina.util.SearchOperation;
@@ -22,8 +23,12 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     public Product createProduct(ProductRequest productRequest){
-        Product product = new Product(productRequest.getName(),productRequest.getPrice());
+        Category category = categoryRepository.findByName(productRequest.getCategoryName());
+        Product product = new Product(productRequest.getName(),productRequest.getPrice(),category);
         return productRepository.save(product);
     }
 

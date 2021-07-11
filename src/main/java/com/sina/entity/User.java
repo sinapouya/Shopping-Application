@@ -5,17 +5,17 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 
 @Entity
 @Table(name="users")
-
-@ToString(exclude = "roles")
-@EqualsAndHashCode(exclude = "roles")
+@ToString(exclude = {"roles","productPolls"})
+@EqualsAndHashCode(exclude = {"roles","productPolls"})
 @Getter @Setter
-public class User {
+public class User  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,6 +40,13 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "users_poll",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "poll_id"))
+    private Set<ProductPoll> productPolls = new HashSet<>();
+
 
     public User() {
     }
@@ -96,4 +103,21 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Set<ProductPoll> getProductPolls() {
+        return productPolls;
+    }
+
+    public void setProductPolls(Set<ProductPoll> productPolls) {
+        this.productPolls = productPolls;
+    }
+
 }
