@@ -15,4 +15,6 @@ public class ProductPollRequest {
 
     private String productName;
 
+    private Integer rate;
+
 }

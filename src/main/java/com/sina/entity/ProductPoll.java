@@ -46,4 +46,11 @@ public class ProductPoll implements Serializable {
         this.rate = rate;
         this.comment = comment;
     }
+
+    public ProductPoll(ProductRankEnum rate, String comment, Product product, User user) {
+        this.rate = rate;
+        this.comment = comment;
+        this.product = product;
+        this.user = user;
+    }
 }

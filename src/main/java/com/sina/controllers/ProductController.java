@@ -76,6 +76,9 @@ public class ProductController {
                     .body(new MessageResponse("Error: user name is not exist!"));
         }
         ProductPoll productPoll = productPollService.createProductPoll(productPollRequest);
-        return ResponseEntity.ok(new ProductPollResponse(productPoll.getComment(),productPoll.getUser().getUsername(), productPoll.getProduct().getName()));
+        return ResponseEntity.ok(new ProductPollResponse(productPoll.getComment(),
+                productPoll.getUser().getUsername(),
+                productPoll.getProduct().getName(),
+                productPollRequest.getRate()));
     }
 }
