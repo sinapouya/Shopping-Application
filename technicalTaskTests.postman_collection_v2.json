@@ -1,0 +1,453 @@
+{
+	"info": {
+		"_postman_id": "7733aba3-9952-4fb6-9174-c035530425ab",
+		"name": "technicalTaskTests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test  all permisions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"sina\",\n    \"password\":\"123456\",\n    \"email\":\"pooya,sina@gmail.com\",\n    \"role\":[\"user\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://technicaltask.herokuapp.com/api/test/all",
+					"protocol": "https",
+					"host": [
+						"technicaltask",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"test",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"adminP\",\n    \"password\":\"123456\",\n    \"email\":\"pooya.sinaadminp@gmail.com\",\n    \"role\":[\"admin\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://technicaltask.herokuapp.com/api/auth/signup",
+					"protocol": "https",
+					"host": [
+						"technicaltask",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign in user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"adminP\",\n    \"password\":\"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://technicaltask.herokuapp.com/api/auth/signin",
+					"protocol": "https",
+					"host": [
+						"technicaltask",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test admin permision",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pblAiLCJpYXQiOjE2MjYwMjg1MTksImV4cCI6MTYyNjExNDkxOX0.k3OYhHLsxbs0JrphumEN3P7Et5kAfQBON_YP9MYJs_GY-IdqnZyq9Ksra2wq5Py1Yy08kfj86kUkovj7Cb7TUA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://technicaltask.herokuapp.com/api/test/admin",
+					"protocol": "https",
+					"host": [
+						"technicaltask",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"test",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test user permision",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaW5hIiwiaWF0IjoxNjI2MDI4Njg2LCJleHAiOjE2MjYxMTUwODZ9.NII81OVmcde4npdcm5B6hHkIkM3ADBUp97x7XTSU6ZZXZT2qI67nuCCXkW3DJupIvKca1mc4juoGda_wUVw4ow"
+					}
+				],
+				"url": {
+					"raw": "https://technicaltask.herokuapp.com/api/test/user",
+					"protocol": "https",
+					"host": [
+						"technicaltask",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"test",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test create category",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTYyNTk5OTM0OCwiZXhwIjoxNjI2MDg1NzQ4fQ.j8YKEbPRywa3PwAH_MmSnYCIc0DEx-sxv4k-Tr_nX2vhzkm8vW1apX7xKpJRsHsqgY_bm5N_uQH20GmeQM-FJw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"skooter\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://technicaltask.herokuapp.com/api/admin/category/create",
+					"protocol": "https",
+					"host": [
+						"technicaltask",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"admin",
+						"category",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unblock user by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pblAiLCJpYXQiOjE2MjYwMjkwOTMsImV4cCI6MTYyNjExNTQ5M30.PTzCfY0-1XnIZluzn-z-hSHsRUDBMoMwNGaqOrL3ZKMtBYGarACvL0oreP9GPPQM_sv43nxWLeaNAWKqPap18Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://technicaltask.herokuapp.com/api/auth/block/5",
+					"protocol": "https",
+					"host": [
+						"technicaltask",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"auth",
+						"block",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTYyNTk5NjIwNCwiZXhwIjoxNjI2MDgyNjA0fQ.HSwwKDgb7vvLL8RAsD__edlvra6__KnvNzhSwXog96eneKbSh9riRoF9eFcKVlBockLC_x0eozhEUZjkTj8rgw"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"skooterProduct\",\n    \"price\":500,\n    \"categoryName\":\"skooter\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://technicaltask.herokuapp.com/api/admin/product/create",
+					"protocol": "https",
+					"host": [
+						"technicaltask",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"admin",
+						"product",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add poll comment to a product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pblAiLCJpYXQiOjE2MjYwMjkwOTMsImV4cCI6MTYyNjExNTQ5M30.PTzCfY0-1XnIZluzn-z-hSHsRUDBMoMwNGaqOrL3ZKMtBYGarACvL0oreP9GPPQM_sv43nxWLeaNAWKqPap18Q"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\":\"adminP\",\n    \"productName\":\"skooterProduct\",\n    \"comment\":\"this is great 2 !!!\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://technicaltask.herokuapp.com/api/productpoll/create",
+					"protocol": "https",
+					"host": [
+						"technicaltask",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"productpoll",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search by price 2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pblAiLCJpYXQiOjE2MjYwMjkwOTMsImV4cCI6MTYyNjExNTQ5M30.PTzCfY0-1XnIZluzn-z-hSHsRUDBMoMwNGaqOrL3ZKMtBYGarACvL0oreP9GPPQM_sv43nxWLeaNAWKqPap18Q"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://technicaltask.herokuapp.com/api/search/product?search=price<10000,price>700",
+					"protocol": "https",
+					"host": [
+						"technicaltask",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"search",
+						"product"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "price<10000,price>700"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add poll rate to a product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pblAiLCJpYXQiOjE2MjYwMjkwOTMsImV4cCI6MTYyNjExNTQ5M30.PTzCfY0-1XnIZluzn-z-hSHsRUDBMoMwNGaqOrL3ZKMtBYGarACvL0oreP9GPPQM_sv43nxWLeaNAWKqPap18Q"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\":\"adminP\",\n    \"productName\":\"skooterProduct\",\n    \"comment\":\"this is great  1000 !!!\",\n    \"rate\":3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://technicaltask.herokuapp.com/api/productpoll/create",
+					"protocol": "https",
+					"host": [
+						"technicaltask",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"productpoll",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "product edit",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTYyNjAyNzQ3NywiZXhwIjoxNjI2MTEzODc3fQ.3Zxl9T-wLBCpaFSURQ9eFerwupNaxlRTXZ1HiKjKiVE0Nf9BCOewHvc6CTmpv4l4JMR2VoUVuhOlCFWI_NZHSw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productId\":3,\n    \"name\":\"skooterProductEdited\",\n    \"price\":530,\n    \"categoryName\":\"skooter\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://technicaltask.herokuapp.com/api/admin/product/edit",
+					"protocol": "https",
+					"host": [
+						"technicaltask",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"admin",
+						"product",
+						"edit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unblock user by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTYyNjA1ODk0MSwiZXhwIjoxNjI2MTQ1MzQxfQ.BRhKCxK-657FAxh6RIF8mXI8MUe9Tpc9zGmtbzj3K5JdSHhbtcahRzJTR5HP1zMJKPWw4cJ8kO58exeoxqC0wA"
+					}
+				],
+				"url": {
+					"raw": "https://technicaltask.herokuapp.com/api/auth/unblock/5",
+					"protocol": "https",
+					"host": [
+						"technicaltask",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"auth",
+						"unblock",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

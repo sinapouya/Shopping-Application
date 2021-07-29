@@ -25,6 +25,9 @@ public class Category implements Serializable {
     @Column(length = 20)
     private String name;
 
+
+
+
     public Category(String name) {
         this.name = name;
     }
